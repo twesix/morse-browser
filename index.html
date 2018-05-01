@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Mores</title>
+
+    <script src="morse.js"></script>
+</head>
+<body>
+
+<script>
+    var morse = require('../');
+
+    var arr = [
+        'hello',
+        'world'
+    ];
+    console.log(arr);
+
+    var encoded = morse.encode(arr);
+    console.log(encoded);
+
+    var decoded = morse.decode(encoded);
+    console.log(decoded);
+
+    var expected = [
+        'HELLO',
+        'WORLD'
+    ];
+
+    console.log(expected[1] === decoded[1] ? 'pass' : 'fail');
+
+    var str = 'Hello, world.';
+    console.log(str);
+
+    var encoded = morse.encode(str);
+    console.log(encoded);
+
+    var decoded = morse.decode(encoded);
+    console.log(decoded);
+
+    console.log(str.toUpperCase() == decoded ? 'pass' : 'fail');
+
+    var str = 'Hello, world.';
+    console.log(str);
+
+    var encoded = morse.encode(str);
+    console.log(encoded);
+
+    var decoded = morse.decode(encoded, true);
+    console.log(decoded);
+
+    console.log(str.toUpperCase() == decoded ? 'pass' : 'fail');
+</script>
+
+</body>
+</html>

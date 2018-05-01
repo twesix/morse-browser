@@ -17,4 +17,4 @@ var expected = [
   'WORLD'
 ];
 
-console.log(expected[1] == decoded[1] ? 'pass' : 'fail');
+console.log(expected[1] === decoded[1] ? 'pass' : 'fail');
