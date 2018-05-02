@@ -1,4 +1,4 @@
-#morse-browser
+# morse-browser
 
 A simple Morse code library for browser
 
