@@ -1,53 +1,41 @@
-#morse
+#morse-browser
 
-A simple Morse code library for node
+A simple Morse code library for browser
 
-![Samuel F.B. Morse](http://i.imgur.com/HHHTQ.jpg)
+![Samuel F.B. Morse](avatar.jpg)
 
 ## install
 
-For use as a CLI:
+```bash
+npm install morse-browser
+```
 
-    npm install -g morse
+## example usage
 
-For use as a library:
+First, include the morse.js in your html
 
-    npm install morse
+```html
+<script src="morse.js"></script>
+```
 
-## example usage as a CLI
+Then, use morse.encode to encode and morse.decode for decode
 
-````
-$ morse -h
-Usage: morse [options] string
+```javascript
 
-Options:
-  -d, --decode  Decode a string of Morse code  [boolean]
-  -h, --help    Show this text  
-
-$ morse hello > hello.txt
-$ morse -d "`cat hello.txt`"
-HELLO
-````
-
-## example usage as a library
-
-````javascript
-var morse = require('morse');
-
-var encoded = morse.encode('Hello, world.');
-// .... . .-.. .-.. --- --..-- ....... .-- --- .-. .-.. -.. .-.-.-
+const encoded = morse.encode('Hello, world.');
+// ...././.-../.-../---/--..--/......./.--/---/.-./.-../-../.-.-.-
 
 morse.decode(encoded);
 // HELLO, WORLD.
-````
+```
 
-````javascript
-var encoded = morse.encode([ 'hello', 'world' ]);
-// [ '.... . .-.. .-.. ---', '.-- --- .-. .-.. -..' ]
+```javascript
+const encoded = morse.encode([ 'hello', 'world' ]);
+// ["...././.-../.-../---", ".--/---/.-./.-../-.."]
 
 morse.decode(encoded);
 // [ 'HELLO', 'WORLD' ]
-````
+```
 
 ## methods
 
@@ -55,35 +43,10 @@ morse.decode(encoded);
 
 Encodes and returns a given string or array
 
-### morse.decode(obj, dichotomic)
+### morse.decode(obj)
 
 Decodes and returns a string or array
 
-`dichotomic` defaults to false. If passed true, it will use a tree-based approach to decode the string or array. If false, a basic iteration of the map is used.
-
-The dichotomic approach looks like this:
-
-![](http://i.imgur.com/Y1bnV.png)
-
-The implementation does not include spaces right now, so it fails its test. However, it is otherwise accurate.
-
-````javascript
-morse.decode(
-  morse.encode('Hello, world.'),
-  true
-);
-// HELLO,5WORLD.
-````
-
-## attributes
-
-### morse.map
-
-An object containing `letter: morse` translations contained in `map.js`
-
-### morse.tree
-
-A tree-modeled object contained in `tree.js`
 
 ## license
 

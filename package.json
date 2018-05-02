@@ -1,8 +1,8 @@
 {
   "author": "twesix",
   "name": "morse-browser",
-  "description": "Morse code decoder and encoder able to run in browser",
-  "version": "0.1.0",
+  "description": "A simple Morse code library for browser",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/twesix/morse-browser.git"

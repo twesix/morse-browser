@@ -9,48 +9,41 @@
 <body>
 
 <script>
-    var morse = require('../');
+    const arr =
+        [
+            'hello',
+            'world'
+        ]
+    console.log(arr)
 
-    var arr = [
-        'hello',
-        'world'
-    ];
-    console.log(arr);
+    const encoded = morse.encode(arr)
+    console.log(encoded)
 
-    var encoded = morse.encode(arr);
-    console.log(encoded);
+    const decoded = morse.decode(encoded)
+    console.log(decoded)
 
-    var decoded = morse.decode(encoded);
-    console.log(decoded);
+    const expected =
+        [
+            'HELLO',
+            'WORLD'
+        ]
 
-    var expected = [
-        'HELLO',
-        'WORLD'
-    ];
+    console.log(expected[1] === decoded[1] ? 'pass' : 'fail')
 
-    console.log(expected[1] === decoded[1] ? 'pass' : 'fail');
+    console.log('--------------------  1  --------------------')
 
-    var str = 'Hello, world.';
-    console.log(str);
+    const str1 = 'Hello, world.'
+    console.log(str1)
 
-    var encoded = morse.encode(str);
-    console.log(encoded);
+    const encoded1 = morse.encode(str1)
+    console.log(encoded1)
 
-    var decoded = morse.decode(encoded);
-    console.log(decoded);
+    const decoded1 = morse.decode(encoded1)
+    console.log(decoded1)
 
-    console.log(str.toUpperCase() == decoded ? 'pass' : 'fail');
+    console.log(str1.toUpperCase() === decoded1 ? 'pass' : 'fail')
 
-    var str = 'Hello, world.';
-    console.log(str);
-
-    var encoded = morse.encode(str);
-    console.log(encoded);
-
-    var decoded = morse.decode(encoded, true);
-    console.log(decoded);
-
-    console.log(str.toUpperCase() == decoded ? 'pass' : 'fail');
+    console.log('---------------------  2  -------------------')
 </script>
 
 </body>

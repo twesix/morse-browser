@@ -56,304 +56,62 @@ morse._map =
         '_': '..--.-',  // underline
         '@': '.--.-.',  // at symbol from http://www.learnmorsecode.com/
         ' ': '.......'
-    };
-// might be the dumbest idea I've ever had
-morse._tree =
-    {
-        '.': {
-            stop: 'E',
-            '.': {
-                stop: 'I',
-                '.': {
-                    stop: 'S',
-                    '.': {
-                        stop: 'H',
-                        '.': {
-                            stop: '5'
-                        },
-                        '-': {
-                            stop: '4'
-                        }
-                    },
-                    '-': {
-                        stop: 'V',
-                        '.': {
-                            stop: 'Ś'
-                        },
-                        '-': {
-                            stop: '3'
-                        }
-                    }
-                },
-                '-': {
-                    stop: 'U',
-                    '.': {
-                        stop: 'F',
-                        // note lack of -
-                        '.': {
-                            stop: 'É'
-                        }
-                    },
-                    '_': {
-                        stop: 'Ü',
-                        '.': {
-                            stop: 'Ð',
-                            '.': {
-                                stop: '?'
-                            },
-                            '-': {
-                                stop: '_'
-                            }
-                        },
-                        '-': {
-                            stop: '2'
-                        }
-                    }
-                }
-            },
-            '-': {
-                stop: 'A',
-                '.': {
-                    stop: 'R',
-                    '.': {
-                        stop: 'L',
-                        // note lack of .
-                        '-': {
-                            stop: 'È',
-                            '.': {
-                                stop: '"'
-                            }
-                        }
-                    },
-                    '-': {
-                        stop: 'Ä',
-                        // note lack of -
-                        '.': {
-                            stop: '+',
-                            // note lack of .
-                            '-': {
-                                stop: '.'
-                            }
-                        }
-                    }
-                },
-                '-': {
-                    stop: 'W',
-                    '.': {
-                        stop: 'P',
-                        // '.': {},
-                        // TODO can't replicate character -_-
-                        '-': {
-                            stop: 'À',
-                            // note lack of -
-                            '.': {
-                                stop: '@'
-                            }
-                        }
-                    },
-                    '-': {
-                        stop: 'J',
-                        '.': {
-                            stop: 'Ĵ'
-                        },
-                        '-': {
-                            stop: '1',
-                            // note lack of -
-                            '.': {
-                                stop: "'"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        '-': {
-            stop: 'T',
-            '.': {
-                stop: 'N',
-                '.': {
-                    stop: 'D',
-                    '.': {
-                        stop: 'B',
-                        '.': {
-                            stop: '6',
-                            // notive lack of .
-                            '-': {
-                                stop: '-'
-                            }
-                        },
-                        '-': {
-                            stop: '='
-                        }
-                    },
-                    '-': {
-                        stop: 'X',
-                        // notice lack of -
-                        '.': {
-                            stop: '/'
-                        }
-                    }
-                },
-                '-': {
-                    stop: 'K',
-                    '.': {
-                        stop: 'C',
-                        '.': {
-                            stop: 'Ç'
-                        },
-                        '-': {
-                            // notice lack of stop
-                            '.': {
-                                stop: ';'
-                            },
-                            '-': {
-                                stop: '!'
-                            }
-                        }
-                    },
-                    '-': {
-                        stop: 'Y',
-                        // notice lack of -
-                        '.': {
-                            stop: 'Ĥ',
-                            // notice lack of .
-                            '-': {
-                                stop: '()'
-                            }
-                        }
-                    }
-                }
-            },
-            '-': {
-                stop: 'M',
-                '.': {
-                    stop: 'G',
-                    '.': {
-                        stop: 'Z',
-                        '.': {
-                            stop: '7'
-                        },
-                        '-': {
-                            // note lack of stop
-                            // note lack of .
-                            '-': {
-                                stop: ','
-                            }
-                        }
-                    },
-                    '-': {
-                        stop: 'Q',
-                        '.': {
-                            stop: 'Ĝ'
-                        },
-                        '-': {
-                            stop: 'Ñ'
-                        }
-                    }
-                },
-                '-': {
-                    stop: 'O',
-                    '.': {
-                        stop: 'Ö',
-                        // note lack of -
-                        '.': {
-                            stop: '8',
-                            // note lack of -
-                            '.': {
-                                stop: ':'
-                            }
-                        }
-                    },
-                    '-': {
-                        stop: 'CH', // is there a digraph for this?
-                        '.': {
-                            stop: '9'
-                        },
-                        '-': {
-                            stop: '0'
-                        }
-                    }
-                }
-            }
-        }
-    };
-
-morse.decode = function(obj)
-{
-    return maybeRecurse(obj, encodeMorseString); // 如果是数组, 则会依次处理每一个数组成员
-
-    function encodeMorseString (str)
-    {
-        const ret = str.split('');
-        for (const j in ret)
-        {
-            ret[j] = map[ret[j].toUpperCase()] || '?'; // 对照字符->morse码映射表直接转换, 不存在的用?代替
-        }
-        return ret.join(' '); // 结果以空格分隔
     }
-}
+morse._separate = '/'
 
-function decode (obj, useTree = false)
-{
-    return maybeRecurse(obj, decodeMorseString); // 如果是数组, 则会依次处理每一个数组成员
-
-    function decodeMorseString (str)
-    {
-        const ret = str.split(' ');
-        for (const i in ret)
-        {
-            if (useTree)
-            {
-                ret[i] = decodeCharacterByDichotomy(ret[i])
-            }
-            else
-            {
-                ret[i] = decodeCharacterByMap(ret[i])
-            }
-        }
-        return ret.join('');
-    }
-}
-
-function maybeRecurse (obj, func)
+morse._maybeRecurse = function(obj, func)
 {
     if (! obj.pop)
     {
-        return func(obj);
+        return func(obj)
     }
 
-    const clone = [];
+    const clone = []
     for (let i = 0; i < obj.length; i++)
     {
-        clone[i] = func(obj[i]);
+        clone[i] = func(obj[i])
     }
-    return clone;
+    return clone
 }
 
-function decodeCharacterByMap (char)
+morse._decodeCharacterByMap = function(char)
 {
-    for (let index in map)
+    for (let index in morse._map)
     {
-        if (map[index] === char)
+        if (morse._map[index] === char)
         {
-            return index;
+            return index
         }
     }
-    return ' ';
+    return ' '
 }
 
-function decodeCharacterByDichotomy (char)
+morse.encode = function(obj)
 {
-    const sub = char.split('')
-    return traverseNodeWithCharacters(tree, sub)
+    return morse._maybeRecurse(obj, encodeMorseString) // 如果是数组, 则会依次处理每一个数组成员
 
-    function traverseNodeWithCharacters (node, chars)
+    function encodeMorseString (str)
     {
-        const cur = chars.shift()
-        if (!node[cur])
+        const ret = str.split('')
+        for (const j in ret)
         {
-            return node.stop || '?'
+            ret[j] = morse._map[ret[j].toUpperCase()] || '?' // 对照字符->morse码映射表直接转换, 不存在的用?代替
         }
-        return traverseNodeWithCharacters(node[cur], chars)
+        return ret.join(morse._separate)
+    }
+}
+
+morse.decode = function(obj)
+{
+    return morse._maybeRecurse(obj, decodeMorseString) // 如果是数组, 则会依次处理每一个数组成员
+
+    function decodeMorseString (str)
+    {
+        const ret = str.split(morse._separate)
+        for (const i in ret)
+        {
+            ret[i] = morse._decodeCharacterByMap(ret[i])
+        }
+        return ret.join('')
     }
 }
